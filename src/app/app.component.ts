@@ -35,6 +35,8 @@ export class AppComponent {
     this.navs=[
       {name:'Home',
       path:'home'},
+      {name:'Authentification',
+      path:'authentification'},
     ]
   }
 
