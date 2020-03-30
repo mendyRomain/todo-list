@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons clear (click)="dismiss()" >
+          Fermer
+      </ion-buttons>
+    <ion-title>settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list-header>
+        <ion-label>Theme</ion-label>
+      </ion-list-header>
+  <ion-list>
+    <ion-item (click)="changeTheme('autumn')">Autumn</ion-item> 
+    <ion-item (click)="changeTheme('night')">Dark</ion-item>
+    <ion-item (click)="changeTheme('neon')">Neon</ion-item>
+  </ion-list>
+</ion-content>

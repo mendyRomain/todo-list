@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { SettingsPage } from '../settings/settings.page';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit{
 
-  constructor() {}
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit(){
 
+  }
+
+  async openSetting(){
+    let modal =await this.modalCtrl.create({
+      component: SettingsPage
+    });
+
+    return await modal.present();
   }
 
   

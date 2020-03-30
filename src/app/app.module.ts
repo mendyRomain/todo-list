@@ -9,10 +9,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { SettingsPage } from './settings/settings.page';
 
 var firebaseConfig = {
   apiKey: "AIzaSyCThqdMQUM-HH3ThXw_8hf4msBZd4waPUY",
@@ -25,14 +28,15 @@ var firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, SettingsPage],
+  entryComponents: [SettingsPage],
   imports: [BrowserModule, IonicModule.forRoot(), 
     AppRoutingModule, 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireStorageModule],
+    AngularFireStorageModule,
+    IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
