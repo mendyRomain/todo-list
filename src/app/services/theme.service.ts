@@ -19,10 +19,15 @@ export class ThemeService {
   }
 
   // Override all global variables with a new theme
-  setTheme(theme) {
+  setTheme(theme, name) {
     const cssText = CSSTextGenerator(theme);
     this.setGlobalCSS(cssText);
     this.storage.set('theme', cssText);
+    this.storage.set('nameTheme', name);
+  }
+
+  getTheme(){
+    return this.storage.get('nameTheme');
   }
 
   // Define a single CSS variable

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ThemeService } from '../services/theme.service';
+import { toastController } from '@ionic/core';
 
 const themes = {
   autumn: {
@@ -43,10 +44,25 @@ const themes = {
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+  favoriteTheme: string;
 
-  constructor(public modalCtrl: ModalController, private theme: ThemeService) { }
+
+  constructor(public modalCtrl: ModalController, private theme: ThemeService, private toastController: ToastController) { }
 
   ngOnInit() {
+    this.theme.getTheme().then((name)=> {
+      this.favoriteTheme = name;
+    }).catch(
+      async (error)=> {
+        let toast = await this.toastController.create(
+          {
+            message:error,
+            duration:3000,
+            position:'bottom'
+          }
+        );
+        toast.present();
+    });
   }
 
   dismiss(){
@@ -54,7 +70,7 @@ export class SettingsPage implements OnInit {
   }
 
   changeTheme(name) {
-    this.theme.setTheme(themes[name]);
+    this.theme.setTheme(themes[name], name);
   }
 
 }

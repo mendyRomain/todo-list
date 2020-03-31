@@ -16,6 +16,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { SettingsPage } from './settings/settings.page';
+import { FormsModule } from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "AIzaSyCThqdMQUM-HH3ThXw_8hf4msBZd4waPUY",
@@ -36,6 +37,7 @@ var firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    FormsModule,
     IonicStorageModule.forRoot()],
   providers: [
     StatusBar,

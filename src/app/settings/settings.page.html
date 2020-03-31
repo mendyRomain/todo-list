@@ -8,12 +8,26 @@
 </ion-header>
 
 <ion-content>
-    <ion-list-header>
-        <ion-label>Theme</ion-label>
-      </ion-list-header>
   <ion-list>
-    <ion-item (click)="changeTheme('autumn')">Autumn</ion-item> 
-    <ion-item (click)="changeTheme('night')">Dark</ion-item>
-    <ion-item (click)="changeTheme('neon')">Neon</ion-item>
-  </ion-list>
+      <ion-radio-group [(ngModel)]="favoriteTheme" >
+        <ion-list-header>
+          <ion-label>Theme</ion-label>
+        </ion-list-header>
+    
+        <ion-item  (click)="changeTheme('autumn')">
+          <ion-label>Autumn</ion-label>
+          <ion-radio slot="start" value="autumn" mode="md" ></ion-radio>
+        </ion-item>
+    
+        <ion-item  (click)="changeTheme('night')">
+          <ion-label>Dark</ion-label>
+          <ion-radio slot="start" value="night" mode="md" ></ion-radio>
+        </ion-item>
+    
+        <ion-item  (click)="changeTheme('neon')">
+          <ion-label>Neon</ion-label>
+          <ion-radio slot="start" value="neon" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
 </ion-content>
