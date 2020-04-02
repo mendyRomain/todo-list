@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },  {
+    path: 'counter',
+    loadChildren: () => import('./counter/counter.module').then( m => m.CounterPageModule)
   },
+
 ];
 
 @NgModule({

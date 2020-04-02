@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>counter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)='incrementFirstCounter()'>Counter 1</ion-button>
+
+
+<div *ngIf="counterList">
+    <ion-list *ngFor="let count of counterList" >
+        <ion-item>counter Name: {{count.counterName}}, counter: {{count.counterNb}} </ion-item>
+    </ion-list>
+</div>
+
+
+</ion-content>
