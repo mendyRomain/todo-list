@@ -59,7 +59,12 @@ export class AppComponent {
       {
         name:'Counter',
         path:'counter'
+      },
+      {
+        name:'Task',
+        path:'task'
       }
+
     ]
   }
 

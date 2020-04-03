@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'counter',
     loadChildren: () => import('./counter/counter.module').then( m => m.CounterPageModule)
   },
+  {
+    path: 'task',
+    loadChildren: () => import('./task/task.module').then( m => m.TaskPageModule)
+  },
 
 ];
 

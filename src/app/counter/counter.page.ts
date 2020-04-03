@@ -68,9 +68,45 @@ export class CounterPage implements OnInit {
     }).catch((error)=>{
       console.log(error);
     });
-
-    
-    
   }
 
+  incrementSecondCounter(){
+    let isSecondCounter= false ;
+    this.counterSevice.getAllCounter().then((data: DataSnapshot)=>{
+      data.forEach((childSnapshot)=>{
+        const counterChild = new Counter(childSnapshot.key, childSnapshot.val().counterName, childSnapshot.val().counterNb);
+        if(counterChild.counterName === "secondCounter"){
+          //faire update + 1 en base 
+          isSecondCounter= true;
+          counterChild.counterNb = counterChild.counterNb+1;
+          this.counterSevice.update(counterChild);
+          this.counterList= [];
+        this.counterSevice.retrieveData().then(()=>{
+          console.log("get counters check");
+        }).catch((error)=>{
+          console.log(error);
+        });
+        }
+      });
+
+      if(!isSecondCounter){
+        let secondCounter ={
+          id:'',
+          counterName:"secondCounter",
+          counterNb:1
+        }
+        this.counterL =[secondCounter];
+        // this.counterSevice.saveData(this.counterL);
+        this.counterSevice.pushData(secondCounter);
+        this.counterList= [];
+        this.counterSevice.retrieveData().then(()=>{
+          console.log("get counters check");
+        }).catch((error)=>{
+          console.log(error);
+        }); 
+      }
+    }).catch((error)=>{
+      console.log(error);
+    });
+  }
 }
