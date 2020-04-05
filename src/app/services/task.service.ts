@@ -47,7 +47,7 @@ export class TaskService {
         (data: DataSnapshot) => {
           this.taskList=[];
           data.forEach((childSnapshot)=>{
-            const taskChild = new Task(childSnapshot.key, childSnapshot.val().taskName, childSnapshot.val().taskNb);
+            const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle,  childSnapshot.val().taskName, childSnapshot.val().taskNb);
             this.taskList.push(taskChild);
           });
           this.emitTask();
@@ -69,7 +69,7 @@ export class TaskService {
         (data: DataSnapshot) => {
           this.taskList=[];
           data.forEach((childSnapshot)=>{
-            const taskChild = new Task(childSnapshot.key, childSnapshot.val().taskName, childSnapshot.val().taskNb);
+            const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle, childSnapshot.val().taskName, childSnapshot.val().taskNb);
             this.taskList.push(taskChild);
           });
           resolve(data);

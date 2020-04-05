@@ -13,6 +13,7 @@ import { stringify } from 'querystring';
   })
   export class TaskPage implements OnInit {
   @Input() tacheNom:string;
+  @Input() taskTitle;
   taskL:Task[];
   tasks: Task[];
   taskList:Task[];
@@ -36,7 +37,7 @@ import { stringify } from 'querystring';
     let isfirstTask= false ;
     this.taskService.getAllTask().then((data: DataSnapshot)=>{
       data.forEach((childSnapshot)=>{
-        const taskChild = new Task(childSnapshot.key, childSnapshot.val().taskName, childSnapshot.val().taskNb);
+        const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle, childSnapshot.val().taskName, childSnapshot.val().taskNb);
         if(taskChild.taskName === "firstTask"){
           //faire update + 1 en base 
           isfirstTask= true;
@@ -55,8 +56,9 @@ import { stringify } from 'querystring';
       if(!isfirstTask){
         let firstTask ={
           id:'',
+          taskTitle: this.taskTitle,
           taskName: this.tacheNom,
-          taskNb:1
+          taskNb:data.numChildren()+1
         }
         this.taskL =[firstTask];
         // this.taskService.saveData(this.taskL);

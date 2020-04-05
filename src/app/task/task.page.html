@@ -5,23 +5,49 @@
     </ion-buttons>
     <ion-title>tasks</ion-title>
   </ion-toolbar>
+  <!-- <ion-item>
+      <ion-label position="floating">titre</ion-label>
+    <ion-input [(ngModel)]="taskTitle"></ion-input>
+    <ion-label position="floating">Nom de la tache</ion-label>
+    <ion-input [(ngModel)]="tacheNom"></ion-input>
+  </ion-item> -->
+
+  
+
+  <ion-card>
+          <ion-item>
+            <ion-label position="floating">titre:</ion-label>
+            <ion-input [(ngModel)]="taskTitle"></ion-input>
+            <ion-label position="floating">Nom de la tache:</ion-label>
+            <ion-input [(ngModel)]="tacheNom"></ion-input>
+          </ion-item>
+          <ion-button (click)='insertTask()'>Insertion de la tache</ion-button>
+      
+    </ion-card>
 </ion-header>
 
 <ion-content>
 
-  <ion-item>
-    <ion-label position="floating">Nom de la tache</ion-label>
-    <ion-input [(ngModel)]="tacheNom"></ion-input>
-  </ion-item>
-
-  <ion-button (click)='insertTask()'>Insertion de la tache</ion-button>
+  
 
 
-<div *ngIf="taskList">
+<!-- <div *ngIf="taskList">
     <ion-list *ngFor="let task of taskList" >
         <ion-item>task {{task.taskNb}} : {{task.taskName}} </ion-item>
     </ion-list>
-</div>
+</div> -->
+
+<ion-card *ngFor="let task of taskList" >
+    <ion-card-header>
+      <ion-card-subtitle>{{task.taskNb}}</ion-card-subtitle>
+      <ion-card-title>{{task.taskTitle}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+     {{task.taskName}}
+    </ion-card-content>
+  </ion-card>
+  
 
 
 </ion-content>
