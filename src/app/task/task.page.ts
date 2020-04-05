@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { TaskList } from '../models/taskList';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
 import { stringify } from 'querystring';
+import { ToastController } from '@ionic/angular';
 
 @Component({
     selector: 'app-task',
@@ -20,15 +21,22 @@ import { stringify } from 'querystring';
 
   taskSubcription: Subscription;
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService, private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.taskSubcription = this.taskService.tasks$.subscribe((tasks: Task[])=>{
       this.taskList=tasks.slice();
     });
     this.taskService.retrieveData().then(()=>{
-    }).catch((error)=>{
-      console.log(error);
+    }).catch(
+      async (error)=>{
+        console.log(error);
+        let toast=await this.toastCtrl.create({
+          message: error,
+          duration:3000,
+          position:'bottom'
+        });
+        toast.present();
     }); 
     
   }
@@ -47,8 +55,15 @@ import { stringify } from 'querystring';
           this.taskList= [];
         this.taskService.retrieveData().then(()=>{
           console.log("get tasks check");
-        }).catch((error)=>{
+        }).catch(
+          async (error)=>{
           console.log(error);
+          let toast=await this.toastCtrl.create({
+            message: error,
+            duration:3000,
+            position:'bottom'
+          });
+          toast.present();
         });
         }
       });
@@ -66,12 +81,51 @@ import { stringify } from 'querystring';
         this.taskList= [];
         this.taskService.retrieveData().then(()=>{
           console.log("get tasks check");
-        }).catch((error)=>{
+        }).catch(async (error)=>{
           console.log(error);
+          let toast=await this.toastCtrl.create({
+            message: error,
+            duration:3000,
+            position:'bottom'
+          });
+          toast.present();
         }); 
       }
-    }).catch((error)=>{
+    }).catch(async (error)=>{
       console.log(error);
+      let toast=await this.toastCtrl.create({
+        message: error,
+        duration:3000,
+        position:'bottom'
+      });
+      toast.present();
+    });
+  }
+
+  onDelete(id :string){
+    this.taskService.delete(id).then((data)=>{
+      console.log("delete Ok");
+      this.taskList= [];
+        this.taskService.retrieveData().then(()=>{
+          console.log("get tasks check");
+        }).catch(async (error)=>{
+          console.log(error);
+          let toast=await this.toastCtrl.create({
+            message: error,
+            duration:3000,
+            position:'bottom'
+          });
+          toast.present();
+        }); 
+    }).catch(
+      async (error)=>{
+        console.log(error);
+        let toast=await this.toastCtrl.create({
+          message: error,
+          duration:3000,
+          position:'bottom'
+        });
+        toast.present();
     });
   }
 

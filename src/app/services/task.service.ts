@@ -94,4 +94,14 @@ export class TaskService {
       });
     });
   }
+
+  delete(id :string){
+    return new Promise((resolve, reject)=>{
+      firebase.database().ref('tasks').child(id).remove().then((data)=>{
+        resolve(data);
+      }, (error)=>{
+        reject(error);
+      });
+    });
+  }
 }
