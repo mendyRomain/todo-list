@@ -40,16 +40,18 @@
 <ion-card *ngFor="let task of taskList" >
     <ion-card-header>
       <ion-card-subtitle>{{task.taskNb}}
-          <ion-button  (click)="onDelete(task.id)" color='danger'>
-              <ion-icon name="trash-outline"></ion-icon>
-          </ion-button>
       </ion-card-subtitle>
-      <ion-card-title>{{task.taskTitle}}</ion-card-title>
+      <ion-card-title>
+        {{task.taskTitle}} 
+      </ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
      {{task.taskName}}
     </ion-card-content>
+    <ion-button (click)="onDelete(task.id)" color='danger'>
+        <ion-icon name="trash-outline"></ion-icon>
+    </ion-button>
    
   </ion-card>
   
