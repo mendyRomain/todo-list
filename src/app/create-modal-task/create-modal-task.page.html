@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons clear (click)="dismiss()" >
+          Fermer
+      </ion-buttons>
+    <ion-title>create-modal-task</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+      <form [formGroup]="taskForm">
+          <ion-item>
+              <ion-label>Titre:</ion-label>
+              <ion-input formControlName="title"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Descrption:</ion-label>
+              <ion-input formControlName="description"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Date de debut:</ion-label>
+              <ion-datetime formControlName="dateDebut" value={{today}} displayFormat="DD/MM/YYYY" display-timezone="utc"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>Date de fin:</ion-label>
+              <ion-datetime formControlName="dateFin"  value={{today}}  displayFormat="DD/MM/YYYY" display-timezone="utc"></ion-datetime>
+          </ion-item>
+         
+          <ion-button (click)="onSubmitForm()" >submit</ion-button>
+        </form>
+  </ion-card>
+  
+
+</ion-content>

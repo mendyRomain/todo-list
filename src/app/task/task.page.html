@@ -14,16 +14,18 @@
 
   
 
-  <ion-card>
+  <!-- <ion-card>
           <ion-item>
             <ion-label position="floating">titre:</ion-label>
             <ion-input [(ngModel)]="taskTitle"></ion-input>
-            <ion-label position="floating">Nom de la tache:</ion-label>
+            <ion-label position="floating">description de la tache:</ion-label>
             <ion-input [(ngModel)]="tacheNom"></ion-input>
           </ion-item>
           <ion-button (click)='insertTask()'>Insertion de la tache</ion-button>
-      
-    </ion-card>
+          <ion-button (click)="onloadCreateModalTask()">create task</ion-button>
+    </ion-card> -->
+
+    <ion-button (click)="onloadCreateModalTask()" expand="full" >create task</ion-button>
 </ion-header>
 
 <ion-content>
@@ -52,6 +54,7 @@
     <ion-button (click)="onDelete(task.id)" color='danger'>
         <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
+    <ion-button (click)='onLoadUpdateModal(task)'>update</ion-button>
    
   </ion-card>
   

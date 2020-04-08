@@ -47,7 +47,7 @@ export class TaskService {
         (data: DataSnapshot) => {
           this.taskList=[];
           data.forEach((childSnapshot)=>{
-            const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle,  childSnapshot.val().taskName, childSnapshot.val().taskNb);
+            const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle,  childSnapshot.val().taskName, childSnapshot.val().dateDebut, childSnapshot.val().dateFin);
             this.taskList.push(taskChild);
           });
           this.emitTask();
@@ -69,7 +69,7 @@ export class TaskService {
         (data: DataSnapshot) => {
           this.taskList=[];
           data.forEach((childSnapshot)=>{
-            const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle, childSnapshot.val().taskName, childSnapshot.val().taskNb);
+            const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle, childSnapshot.val().taskName, childSnapshot.val().dateDebut, childSnapshot.val().dateFin);
             this.taskList.push(taskChild);
           });
           resolve(data);
@@ -84,7 +84,8 @@ export class TaskService {
     return new Promise((resolve, reject)=>{
       let data ={
           taskName:task.taskName,
-          taskNb:task.taskNb,
+          dateDebut:task.dateDebut,
+          dateFin: task.dateFin,
           id: task.id
       };
       firebase.database().ref('tasks').child(task.id).update(data).then((data)=>{

@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'task',
     loadChildren: () => import('./task/task.module').then( m => m.TaskPageModule)
   },
+  {
+    path: 'update-modal',
+    loadChildren: () => import('./update-modal/update-modal.module').then( m => m.UpdateModalPageModule)
+  },
+  {
+    path: 'create-modal-task',
+    loadChildren: () => import('./create-modal-task/create-modal-task.module').then( m => m.CreateModalTaskPageModule)
+  },
 
 ];
 

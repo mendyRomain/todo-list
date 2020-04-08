@@ -51,7 +51,12 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.theme.getTheme().then((name)=> {
-      this.favoriteTheme = name;
+      if(name!= null){
+        this.favoriteTheme = name;
+      }else{
+        this.favoriteTheme = 'default';
+      }
+      
     }).catch(
       async (error)=> {
         let toast = await this.toastController.create(

@@ -11,12 +11,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { IonicStorageModule } from '@ionic/storage';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { SettingsPage } from './settings/settings.page';
 import { FormsModule } from '@angular/forms';
+import { UpdateModalPage } from './update-modal/update-modal.page';
+import { CreateModalTaskPage } from './create-modal-task/create-modal-task.page';
 
 var firebaseConfig = {
   apiKey: "AIzaSyCThqdMQUM-HH3ThXw_8hf4msBZd4waPUY",
@@ -29,8 +33,8 @@ var firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, SettingsPage],
-  entryComponents: [SettingsPage],
+  declarations: [AppComponent, SettingsPage, UpdateModalPage, CreateModalTaskPage],
+  entryComponents: [SettingsPage, UpdateModalPage, CreateModalTaskPage],
   imports: [BrowserModule, IonicModule.forRoot(), 
     AppRoutingModule, 
     AngularFireModule.initializeApp(firebaseConfig),
@@ -38,6 +42,7 @@ var firebaseConfig = {
     AngularFireAuthModule,
     AngularFireStorageModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
