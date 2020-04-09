@@ -83,13 +83,19 @@ export class TaskService {
   update(task: Task){
     return new Promise((resolve, reject)=>{
       let data ={
+          taskTitle:task.taskTitle,
           taskName:task.taskName,
           dateDebut:task.dateDebut,
           dateFin: task.dateFin,
           id: task.id
       };
-      firebase.database().ref('tasks').child(task.id).update(data).then((data)=>{
-        resolve(data);
+      console.log("dans le service");
+      console.log(task);
+      console.log(data);
+      console.log(task.id);
+      firebase.database().ref('tasks').child(task.id.trim()).update(data).then((dataU)=>{
+        console.log(dataU);
+        resolve(dataU);
       },(error)=>{
         reject(error);
       });

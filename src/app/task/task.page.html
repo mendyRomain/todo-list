@@ -51,11 +51,13 @@
     <ion-card-content>
      {{task.taskName}}
     </ion-card-content>
+    <ion-button  (click)='onLoadUpdateModal(task)'>
+        <ion-icon name="pencil-outline"></ion-icon>
+    </ion-button>
     <ion-button (click)="onDelete(task.id)" color='danger'>
         <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
-    <ion-button (click)='onLoadUpdateModal(task)'>update</ion-button>
-   
+    
   </ion-card>
   
 
