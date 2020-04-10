@@ -19,28 +19,78 @@ import { CreateModalTaskPage } from '../create-modal-task/create-modal-task.page
   @Input() taskTitle;
   taskL:Task[];
   tasks: Task[];
-  taskList:Task[];
+  taskList:Task[]=[];
+  taskTest:Task[];
 
   taskSubcription: Subscription;
 
   constructor(private taskService: TaskService, private toastCtrl: ToastController, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    this.taskSubcription = this.taskService.tasks$.subscribe((tasks: Task[])=>{
-      this.taskList=tasks.slice();
+    // this.taskSubcription = this.taskService.tasks$.subscribe((tasks: Task[])=>{
+    //   this.taskList=tasks.slice();
+    // });
+    // this.taskService.retrieveData().then(()=>{
+    // }).catch(
+    //   async (error)=>{
+    //     console.log(error);
+    //     let toast=await this.toastCtrl.create({
+    //       message: error,
+    //       duration:3000,
+    //       position:'bottom'
+    //     });
+    //     toast.present();
+    // }); 
+    // this.taskService.getAll();
+    console.log("dans le ng init");
+    this.taskService.getAllAdd().subscribe((actions)=>{
+      // console.log(actions);
+      this.taskList=[];
+      actions.forEach((action)=>{
+        console.log(action.payload);
+        this.taskList.push(
+          {
+            id:action.payload.key,
+            taskTitle: action.payload.exportVal().taskTitle,
+            taskName:action.payload.exportVal().taskName,
+            dateDebut:action.payload.exportVal().taskDateDebut,
+            dateFin:action.payload.exportVal().dateFin
+          }
+        );
+      });
     });
-    this.taskService.retrieveData().then(()=>{
-    }).catch(
-      async (error)=>{
-        console.log(error);
-        let toast=await this.toastCtrl.create({
-          message: error,
-          duration:3000,
-          position:'bottom'
-        });
-        toast.present();
-    }); 
-    
+    this.taskService.getAllChange().subscribe((actions)=>{
+      // console.log(actions);
+      this.taskList=[];
+      actions.forEach((action)=>{
+        // console.log(action.payload.exportVal());
+        this.taskList.push(
+          {
+            id:action.payload.key,
+            taskTitle: action.payload.exportVal().taskTitle,
+            taskName:action.payload.exportVal().taskName,
+            dateDebut:action.payload.exportVal().taskDateDebut,
+            dateFin:action.payload.exportVal().dateFin
+          }
+        );
+      });
+    });
+    this.taskService.getAllRemove().subscribe((actions)=>{
+      // console.log(actions);
+      this.taskList=[];
+      actions.forEach((action)=>{
+        // console.log(action.payload.exportVal());
+        this.taskList.push(
+          {
+            id:action.payload.key,
+            taskTitle: action.payload.exportVal().taskTitle,
+            taskName:action.payload.exportVal().taskName,
+            dateDebut:action.payload.exportVal().taskDateDebut,
+            dateFin:action.payload.exportVal().dateFin
+          }
+        );
+      });
+    });
   }
 
   // insertTask(){
@@ -107,18 +157,18 @@ import { CreateModalTaskPage } from '../create-modal-task/create-modal-task.page
   onDelete(id :string){
     this.taskService.delete(id).then((data)=>{
       console.log("delete Ok");
-      this.taskList= [];
-        this.taskService.retrieveData().then(()=>{
-          console.log("get tasks check");
-        }).catch(async (error)=>{
-          console.log(error);
-          let toast=await this.toastCtrl.create({
-            message: error,
-            duration:3000,
-            position:'bottom'
-          });
-          toast.present();
-        }); 
+      // this.taskList= [];
+        // this.taskService.retrieveData().then(()=>{
+        //   console.log("get tasks check");
+        // }).catch(async (error)=>{
+        //   console.log(error);
+        //   let toast=await this.toastCtrl.create({
+        //     message: error,
+        //     duration:3000,
+        //     position:'bottom'
+        //   });
+        //   toast.present();
+        // }); 
     }).catch(
       async (error)=>{
         console.log(error);

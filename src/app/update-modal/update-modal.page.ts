@@ -44,21 +44,6 @@ export class UpdateModalPage implements OnInit {
     let task = new Task(this.task.id, this.taskForm.get('title').value,this.taskForm.get('description').value, this.taskForm.get('dateDebut').value, this.taskForm.get('dateFin').value);
     this.taskService.update(task).then((data)=>{
       console.log("reussi");
-      this.taskService.retrieveData().then(
-        (data)=>{
-          console.log("ok");
-        }
-      ).catch(
-        async (error)=>{
-        let toast =await this.toastCtrl.create(
-          {
-            message:error,
-            duration:3000,
-            position:'bottom'
-          }
-        );
-        toast.present();
-      });
       this.dismiss();
     }).catch(
       async (error)=>{

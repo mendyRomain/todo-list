@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { DataSnapshot } from '@angular/fire/database/interfaces';
 import { Task } from '../models/task';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { TaskList } from '../models/taskList';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class TaskService {
   
   tasks$ = new  Subject<Task[]>();
   taskList: Task[]=[];
-  constructor() { }
+  constructor(public afDB: AngularFireDatabase) { }
 
   saveData(task: Task[]) {
     return new Promise((resolve, reject) => {
@@ -59,9 +60,23 @@ export class TaskService {
     });
   }
 
+  getAllAdd(): Observable<any>{
+    return this.afDB.list('/tasks').snapshotChanges(['child_added']);
+  }
+
+  getAllChange(): Observable<any>{
+    return this.afDB.list('/tasks').snapshotChanges(['child_changed']);
+  }
+
+  getAllRemove(): Observable<any>{
+    return this.afDB.list('/tasks').snapshotChanges(['child_removed']);
+  }
+
   emitTask(){
     this.tasks$.next(this.taskList.slice());
   }
+
+
 
   getAllTask(){
     return new Promise((resolve, reject) => {
