@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { AuthentificationPageRoutingModule } from './authentification-routing.module';
 
 import { AuthentificationPage } from './authentification.page';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { UserService } from '../services/user.service';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { AuthentificationPage } from './authentification.page';
     IonicModule,
     AuthentificationPageRoutingModule
   ],
-  declarations: [AuthentificationPage]
+  declarations: [AuthentificationPage],
+  providers: [AngularFirestore, UserService]
 })
 export class AuthentificationPageModule {}

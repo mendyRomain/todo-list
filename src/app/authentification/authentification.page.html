@@ -8,5 +8,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)='testAuth()'>test connection</ion-button>
+  <ion-list>
+  
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>    
+  
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>        
+  
+  </ion-list>
+  <ion-button (click)='fInscription()'>S'inscrire</ion-button>
+  <ion-button (click)='fLogin()'>Se connecter</ion-button>
+  <ion-button (click)='fLogOff()'>Se déconnecter</ion-button>
 </ion-content>
