@@ -37,29 +37,8 @@ export class CreateModalTaskPage implements OnInit {
   }
 
   onSubmitForm(){
-    let task= new Task("", this.taskForm.get('title').value, this.taskForm.get('description').value, this.taskForm.get('dateDebut').value, this.taskForm.get('dateFin').value )
-    console.log(this.taskForm.get('title').value);
-    console.log(this.taskForm.get('dateDebut').value)
-    this.taskService.pushData(task).then((data)=>{
-      console.log(data);
-      console.log("save ok");
-      this.taskService.retrieveData().then(
-        (data)=>{
-          console.log("ok");
-        }
-      ).catch(
-        async (error)=>{
-        let toast =await this.toastCtrl.create(
-          {
-            message:error,
-            duration:3000,
-            position:'bottom'
-          }
-        );
-        toast.present();
-      });
-      
-    }).catch(
+    let task= new Task("", this.taskForm.get('title').value, this.taskForm.get('description').value, this.taskForm.get('dateDebut').value, this.taskForm.get('dateFin').value);
+    this.taskService.addTask(task).catch( 
       async (error)=>{
       let toast =await this.toastCtrl.create(
         {
@@ -70,6 +49,7 @@ export class CreateModalTaskPage implements OnInit {
       );
       toast.present();
     });
+    
     this.dismiss();
   }
 

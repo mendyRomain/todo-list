@@ -42,10 +42,7 @@ export class UpdateModalPage implements OnInit {
 
   onSubmitForm(){
     let task = new Task(this.task.id, this.taskForm.get('title').value,this.taskForm.get('description').value, this.taskForm.get('dateDebut').value, this.taskForm.get('dateFin').value);
-    this.taskService.update(task).then((data)=>{
-      console.log("reussi");
-      this.dismiss();
-    }).catch(
+    this.taskService.updateTask(task, task.id).catch(
       async (error)=>{
         let toast = await this.toastCtrl.create({
           message: error,
@@ -55,6 +52,7 @@ export class UpdateModalPage implements OnInit {
         toast.present();
       }
     );
+    this.dismiss();
   }
 
 }

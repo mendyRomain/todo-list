@@ -21,6 +21,8 @@ import { SettingsPage } from './settings/settings.page';
 import { FormsModule } from '@angular/forms';
 import { UpdateModalPage } from './update-modal/update-modal.page';
 import { CreateModalTaskPage } from './create-modal-task/create-modal-task.page';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 var firebaseConfig = {
   apiKey: "AIzaSyCThqdMQUM-HH3ThXw_8hf4msBZd4waPUY",

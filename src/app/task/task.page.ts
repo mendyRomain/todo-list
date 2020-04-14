@@ -22,163 +22,26 @@ import { CreateModalTaskPage } from '../create-modal-task/create-modal-task.page
   taskList:Task[]=[];
   taskTest:Task[];
 
-  taskSubcription: Subscription;
+  
 
   constructor(private taskService: TaskService, private toastCtrl: ToastController, private modalCtrl: ModalController) { }
 
   ngOnInit() {
-    // this.taskSubcription = this.taskService.tasks$.subscribe((tasks: Task[])=>{
-    //   this.taskList=tasks.slice();
-    // });
-    // this.taskService.retrieveData().then(()=>{
-    // }).catch(
-    //   async (error)=>{
-    //     console.log(error);
-    //     let toast=await this.toastCtrl.create({
-    //       message: error,
-    //       duration:3000,
-    //       position:'bottom'
-    //     });
-    //     toast.present();
-    // }); 
-    // this.taskService.getAll();
-    console.log("dans le ng init");
-    this.taskService.getAllAdd().subscribe((actions)=>{
-      // console.log(actions);
-      this.taskList=[];
-      actions.forEach((action)=>{
-        console.log(action.payload);
-        this.taskList.push(
-          {
-            id:action.payload.key,
-            taskTitle: action.payload.exportVal().taskTitle,
-            taskName:action.payload.exportVal().taskName,
-            dateDebut:action.payload.exportVal().taskDateDebut,
-            dateFin:action.payload.exportVal().dateFin
-          }
-        );
-      });
-    });
-    this.taskService.getAllChange().subscribe((actions)=>{
-      // console.log(actions);
-      this.taskList=[];
-      actions.forEach((action)=>{
-        // console.log(action.payload.exportVal());
-        this.taskList.push(
-          {
-            id:action.payload.key,
-            taskTitle: action.payload.exportVal().taskTitle,
-            taskName:action.payload.exportVal().taskName,
-            dateDebut:action.payload.exportVal().taskDateDebut,
-            dateFin:action.payload.exportVal().dateFin
-          }
-        );
-      });
-    });
-    this.taskService.getAllRemove().subscribe((actions)=>{
-      // console.log(actions);
-      this.taskList=[];
-      actions.forEach((action)=>{
-        // console.log(action.payload.exportVal());
-        this.taskList.push(
-          {
-            id:action.payload.key,
-            taskTitle: action.payload.exportVal().taskTitle,
-            taskName:action.payload.exportVal().taskName,
-            dateDebut:action.payload.exportVal().taskDateDebut,
-            dateFin:action.payload.exportVal().dateFin
-          }
-        );
-      });
-    });
+    this.taskService.getTasks().subscribe((datas)=>{
+      this.taskList= datas;
+    })
   }
 
-  // insertTask(){
-  //   let isfirstTask= false ;
-  //   this.taskService.getAllTask().then((data: DataSnapshot)=>{
-  //     data.forEach((childSnapshot)=>{
-  //       const taskChild = new Task(childSnapshot.key,childSnapshot.val().taskTitle, childSnapshot.val().taskName,  childSnapshot.val().dateDebut, childSnapshot.val().dateFin);
-  //       if(taskChild.taskName === "firstTask"){
-  //         //faire update + 1 en base 
-  //         isfirstTask= true;
-  //         taskChild.taskNb = taskChild.taskNb+1;
-  //         taskChild.taskName = this.tacheNom; 
-  //         this.taskService.update(taskChild);
-  //         this.taskList= [];
-  //       this.taskService.retrieveData().then(()=>{
-  //         console.log("get tasks check");
-  //       }).catch(
-  //         async (error)=>{
-  //         console.log(error);
-  //         let toast=await this.toastCtrl.create({
-  //           message: error,
-  //           duration:3000,
-  //           position:'bottom'
-  //         });
-  //         toast.present();
-  //       });
-  //       }
-  //     });
-
-  //     if(!isfirstTask){
-  //       let firstTask ={
-  //         id:'',
-  //         taskTitle: this.taskTitle,
-  //         taskName: this.tacheNom,
-  //         dateDebut:t
-  //       }
-        
-  //       // this.taskService.saveData(this.taskL);
-  //       this.taskService.pushData(firstTask);
-  //       this.taskList= [];
-  //       this.taskService.retrieveData().then(()=>{
-  //         console.log("get tasks check");
-  //       }).catch(async (error)=>{
-  //         console.log(error);
-  //         let toast=await this.toastCtrl.create({
-  //           message: error,
-  //           duration:3000,
-  //           position:'bottom'
-  //         });
-  //         toast.present();
-  //       }); 
-  //     }
-  //   }).catch(async (error)=>{
-  //     console.log(error);
-  //     let toast=await this.toastCtrl.create({
-  //       message: error,
-  //       duration:3000,
-  //       position:'bottom'
-  //     });
-  //     toast.present();
-  //   });
-  // }
-
   onDelete(id :string){
-    this.taskService.delete(id).then((data)=>{
-      console.log("delete Ok");
-      // this.taskList= [];
-        // this.taskService.retrieveData().then(()=>{
-        //   console.log("get tasks check");
-        // }).catch(async (error)=>{
-        //   console.log(error);
-        //   let toast=await this.toastCtrl.create({
-        //     message: error,
-        //     duration:3000,
-        //     position:'bottom'
-        //   });
-        //   toast.present();
-        // }); 
-    }).catch(
-      async (error)=>{
-        console.log(error);
-        let toast=await this.toastCtrl.create({
-          message: error,
-          duration:3000,
-          position:'bottom'
-        });
-        toast.present();
-    });
+    this.taskService.removeTask(id).catch( async (error)=>{
+      console.log(error);
+      let toast=await this.toastCtrl.create({
+        message: error,
+        duration:3000,
+        position:'bottom'
+      });
+      toast.present();
+  });
   }
 
   async onLoadUpdateModal(task: Task){
