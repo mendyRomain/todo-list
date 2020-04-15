@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { UpdateModalPage } from './update-modal/update-modal.page';
 import { CreateModalTaskPage } from './create-modal-task/create-modal-task.page';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './services/auth.service';
 
 
 var firebaseConfig = {
@@ -49,7 +50,8 @@ var firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

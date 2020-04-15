@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-button *ngIf="!isAuthentified" (click)='setProfil()'>Set Profil</ion-button>
+
+  <ion-list>
+  
+    <ion-item>
+      <ion-label position="floating">UserID</ion-label>
+      <ion-input type="text" [(ngModel)]="userid"></ion-input>
+    </ion-item>    
+  
+    <ion-item>
+      <ion-label position="floating">pseudo</ion-label>
+      <ion-input type="text" [(ngModel)]="pseudo"></ion-input>
+    </ion-item>        
+  
+  </ion-list>
+
+  <ion-label position="floating">Profils existants</ion-label>
+  <div *ngIf="profileList">
+    <ion-list *ngFor="let profile of profileList" >
+      <ion-item>profile Name: {{profile.pseudo}}</ion-item>
+    </ion-list>
+  </div>
+
+
+</ion-content>

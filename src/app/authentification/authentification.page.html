@@ -22,6 +22,6 @@
   
   </ion-list>
   <ion-button (click)='fInscription()'>S'inscrire</ion-button>
-  <ion-button (click)='fLogin()'>Se connecter</ion-button>
-  <ion-button (click)='fLogOff()'>Se déconnecter</ion-button>
+  <ion-button *ngIf="!authStatus" (click)='fLogin()'>Se connecter</ion-button>
+  <ion-button *ngIf="authStatus" (click)='fLogOff()'>Se déconnecter</ion-button>
 </ion-content>

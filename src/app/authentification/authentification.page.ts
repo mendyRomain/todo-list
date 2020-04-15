@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-authentification',
@@ -14,13 +15,17 @@ export class AuthentificationPage implements OnInit {
   
   username: string = ""
   password: string = ""
+  authStatus: boolean;
+  userid:string="";
 
   constructor(public auth: AngularFireAuth, 
       private toastCtrl: ToastController,
       public afStore: AngularFirestore,
-      public user: UserService) { }
+      public user: UserService,
+      public authService : AuthService) { }
 
   ngOnInit() {
+    this.authStatus = false;
   }
 
   /*--Vraie programmation--*/
@@ -53,7 +58,12 @@ export class AuthentificationPage implements OnInit {
           username,
           uid: res.user.uid
         })
-        console.log('yep,  '+username+' is signed using '+password);
+
+        this.authService.signedIn();
+        this.authStatus = this.authService.getAuth();
+
+        this.userid=this.user.getUID();
+        console.log('yess,  '+username+' is signed using '+password + ', his user id is ' +this.userid);
       }
     }
     catch(error){
@@ -69,7 +79,13 @@ export class AuthentificationPage implements OnInit {
 fLogOff(){
     const{username, password} = this;
     this.auth.auth.signOut()
-      .then((result)=>{console.log('yep, '+ this.username+' is logged off. His password was '+ this.password);})
+      .then((result)=>{
+
+        this.authService.signedOut();
+        this.authStatus = this.authService.getAuth();
+
+        console.log('yep, '+ this.username+' is logged off. His password was '+ this.password);
+      })
       .catch(async(error)=>{
         const toast = await this.toastCtrl.create({
           message:error,

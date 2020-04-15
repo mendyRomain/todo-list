@@ -63,6 +63,10 @@ export class AppComponent {
       {
         name:'Task',
         path:'task'
+      },
+      {
+        name:'Profil',
+        path:'profil'
       }
 
     ]

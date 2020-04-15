@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'create-modal-task',
     loadChildren: () => import('./create-modal-task/create-modal-task.module').then( m => m.CreateModalTaskPageModule)
   },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
+  },
 
 ];
 
